@@ -29,8 +29,8 @@ def categoricalStats(df: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    if (os.path.exists("data\\dataset.csv")):
-        dataf: pd.DataFrame = pd.read_csv("data\\dataset.csv")
+    if (os.path.exists(".\\data\\datasetClean.csv")):
+        dataf: pd.DataFrame = pd.read_csv(".\\data\\datasetClean.csv")
     else:
         print("First run loadData.py to load the dataset.")
         exit()
@@ -41,8 +41,8 @@ if __name__ == "__main__":
     categorical_columns = dataf.select_dtypes(include=['object', 'category']).columns
     categorical_stats_df = categoricalStats(dataf[categorical_columns])
 
-    numerical_stats_df.to_csv('numerical_stats.csv')
-    categorical_stats_df.to_csv('categorical_stats.csv')
+    numerical_stats_df.to_csv('.\\results\\numerical_stats.csv')
+    categorical_stats_df.to_csv('.\\results\\categorical_stats.csv')
 
     print("Statystyki dla cech numerycznych:")
     print(numerical_stats_df)

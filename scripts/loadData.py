@@ -298,15 +298,15 @@ def changeFromNumericalToCategorical(dataf: pd.DataFrame)->pd.DataFrame:
 
 
 if __name__ == "__main__":
-    if not os.path.exists("data"):
-        os.makedirs("data")
-    if not os.path.exists("data\\dataset.csv"):
+    if not os.path.exists(".\\data"):
+        os.makedirs(".\\data")
+    if not os.path.exists(".\\data\\dataset.csv"):
         path = kagglehub.dataset_download(handle="naveenkumar20bps1137/predict-students-dropout-and-academic-success",path="dataset.csv")
-        shutil.move(path, "data")
+        shutil.move(path, ".\\data")
 
     dataf: pd.DataFrame = pd.read_csv("data\\dataset.csv")
     dataf = changeFromNumericalToCategorical(dataf)
-    dataf.to_csv("data\\dataset.csv",index=False)
+    dataf.to_csv("data\\datasetClean.csv",index=False)
     print("Data loaded and transformed")
 
 
