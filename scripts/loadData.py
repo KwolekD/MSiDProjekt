@@ -293,6 +293,11 @@ def changeFromNumericalToCategorical(dataf: pd.DataFrame)->pd.DataFrame:
     resultDataFrame["Gender"] = resultDataFrame["Gender"].map({1:"Male",0:"Female"}).astype("category")
     resultDataFrame["International"] = resultDataFrame["International"].map({1:"Yes",0:"No"}).astype("category")
     resultDataFrame["Application order"] = resultDataFrame["Application order"].astype("category")
+    resultDataFrame["Tuition fees up to date"] = resultDataFrame["Tuition fees up to date"].map({1:"Yes",0:"No"}).astype("category")
+    resultDataFrame["Application order"] = resultDataFrame["Application order"].astype("category")
+    resultDataFrame['Age group'] = pd.cut(resultDataFrame['Age at enrollment'], 
+                            bins=[0, 20, 25, 30, 40, 100], 
+                            labels=['<20', '20-25', '25-30', '30-40', '>40'])
     return resultDataFrame
 
 

@@ -4,8 +4,6 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from ydata_profiling import ProfileReport
-
 def numericalStats(df: pd.DataFrame) -> pd.DataFrame:
     stats = {
         'mean': df.mean(),
@@ -35,17 +33,16 @@ if __name__ == "__main__":
         print("First run loadData.py to load the dataset.")
         exit()
 
+    if (not os.path.exists(".\\results")):
+        os.mkdir(".\\results")
+
     numerical_columns = dataf.select_dtypes(include=[np.number]).columns
+    numerical_columns = numerical_columns.drop('Application order')
     numerical_stats_df = numericalStats(dataf[numerical_columns])
 
-    categorical_columns = dataf.select_dtypes(include=['object', 'category']).columns
+    categorical_columns = dataf.select_dtypes(include=['object', 'category']).columns.tolist()
+    categorical_columns.append("Application order")
     categorical_stats_df = categoricalStats(dataf[categorical_columns])
 
     numerical_stats_df.to_csv('.\\results\\numerical_stats.csv')
     categorical_stats_df.to_csv('.\\results\\categorical_stats.csv')
-
-    print("Statystyki dla cech numerycznych:")
-    print(numerical_stats_df)
-
-    print("\nStatystyki dla cech kategorialnych:")
-    print(categorical_stats_df)
