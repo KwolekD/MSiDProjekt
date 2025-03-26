@@ -2,7 +2,8 @@
 
 This project analyzes student data to predict dropout rates and academic success. It includes two main scripts:
 1. `loadData.py` – Loads and preprocesses the dataset.
-2. `extractStatistics.py` – Extracts and visualizes statistics from the dataset.
+2. `extractStatistics.py` – Extracts statistics from the dataset and saves them to csv files.
+3. `dataAnalysisMain.py` - Main script for visualizations.
 
 ## Prerequisites
 
