@@ -83,7 +83,7 @@ def LogisticRegressionGradientDescent(df: pd.DataFrame,learning_rate: float = 0.
     X_temp, X_test, y_temp, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     X_train, X_val, y_train, y_val = train_test_split(X_temp, y_temp, test_size=0.25, random_state=42)
     
-    # Przetwarzanie danych (dla wszystkich zbiorów)
+
     preprocessor = ColumnTransformer(
     transformers=[
         ('num', StandardScaler(), numerical_features),
@@ -93,21 +93,19 @@ def LogisticRegressionGradientDescent(df: pd.DataFrame,learning_rate: float = 0.
     X_val_processed = preprocessor.transform(X_val)
     X_test_processed = preprocessor.transform(X_test)
     
-    # Dodanie biasu (kolumna z jedynkami)
+
     X_train_b = np.c_[np.ones(X_train_processed.shape[0]), X_train_processed]
     X_val_b = np.c_[np.ones(X_val_processed.shape[0]), X_val_processed]
     X_test_b = np.c_[np.ones(X_test_processed.shape[0]), X_test_processed]
     
-    # Inicjalizacja wag
+
     theta = np.zeros(X_train_b.shape[1])
     best_theta = theta.copy()
     best_val_loss = float('inf')
-    patience = 50  # Liczba iteracji bez poprawy, po której zatrzymujemy uczenie
+    patience = 50 
     no_improvement = 0
     
-    # Pętla uczenia
     for iteration in range(n_iters):
-        # Mini-batch SGD (Twój obecny kod)
         indices = np.random.randint(0, len(y_train), 32)
         X_batch = X_train_b[indices]
         y_batch = y_train[indices]
