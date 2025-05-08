@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error,accuracy_score,precision_score,recall_score,f1_score
 from sklearn.compose import ColumnTransformer
@@ -97,6 +97,8 @@ def LogisticRegressionGradientDescent(df: pd.DataFrame,learning_rate: float = 0.
     X_train_b = np.c_[np.ones(X_train_processed.shape[0]), X_train_processed]
     X_val_b = np.c_[np.ones(X_val_processed.shape[0]), X_val_processed]
     X_test_b = np.c_[np.ones(X_test_processed.shape[0]), X_test_processed]
+
+
     
 
     theta = np.zeros(X_train_b.shape[1])
@@ -125,7 +127,6 @@ def LogisticRegressionGradientDescent(df: pd.DataFrame,learning_rate: float = 0.
             else:
                 no_improvement += 1
                 if no_improvement >= patience:
-                    print(f"Early stopping at iteration {iteration}")
                     break
     
     theta = best_theta
